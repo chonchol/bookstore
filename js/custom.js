@@ -1,14 +1,18 @@
 let API_URL = 'https://gutendex.com/books';
 let currentPage = 1;
+let booksData = [];
 
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const currentPageSpan = document.getElementById('current-page');
 const loadingElement = document.getElementById('loading');
+const searchField = document.getElementById('search-field');
+const paginationDiv = document.getElementById('pagination');
 
 async function fetchBookList(url) {
     try {
         loadingElement.style.display = 'block'; 
+        paginationDiv.style.display = 'none'; 
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -16,21 +20,26 @@ async function fetchBookList(url) {
         }
 
         const data = await response.json();
-        const books = data.results;
+        booksData = data.results;
 
-        displayBooks(books);
+        displayBooks(booksData);
         updatePaginationButtons(data.previous, data.next);
     } catch (error) {
         console.error('There was a problem fetching the book list:', error);
     } finally {
         loadingElement.style.display = 'none'; 
+        paginationDiv.style.display = 'inherit'; 
     }
 }
 
 function displayBooks(books) {
     const container = document.getElementById('books-container');
-
     container.innerHTML = '';
+
+    if (books.length === 0) {
+        container.innerHTML = '<p class="text-center p-5 mx-auto w-full text-2xl">No books found with the given Title!</p>'; 
+        return;
+    }
 
     books.forEach(book => {
         const author = book.authors.length > 0 ? book.authors[0].name : 'Unknown author';
@@ -97,6 +106,15 @@ nextBtn.addEventListener('click', () => {
         fetchBookList(nextUrl);
     }
 });
+
+searchField.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredBooks = booksData.filter(book =>
+        book.title.toLowerCase().includes(searchTerm)
+    );
+    displayBooks(filteredBooks);
+});
+
 
 // Fetch the initial book list
 fetchBookList(API_URL);
