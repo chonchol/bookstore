@@ -58,26 +58,38 @@ function displayBooks(books) {
         bookDiv.classList.add('w-full', 'md:w-1/3', 'xl:w-1/4', 'p-6', 'flex', 'flex-col');
 
         bookDiv.innerHTML = `
-      <div>
-        <div id="cover-img" class="cover-img w-full h-[300px]">
-          <img class="hover:grow hover:shadow-lg w-full h-full rounded"
-          src="${coverImage}" alt="${book.title} cover">
+        <div>
+            <div id="cover-img" class="cover-img w-full h-[300px]">
+                <img class="hover:grow hover:shadow-lg w-full h-full rounded"
+                src="${coverImage}" alt="${book.title} cover">
+            </div>
+            <div class="pt-5 flex items-start justify-between w-full">
+                <a href="book-details.html" class="font-bold hover:text-black text-[18px] w-4/5 book-title" data-book-id="${bookID}">${book.title}</a>
+                <div class="flex justify-end w-1/5 mt-1">
+                    <img class="w-5 h-5 cursor-pointer love-icon" data-book-id="${bookID}" src="${isWishlisted ? `images/heart-solid.svg` : `images/heart-regular.svg`} " alt="">
+                </div>
+            </div>
+            <p id="author-name" class="author-name text-sm">Written by: ${author}</p>
+            <div class="flex justify-between mt-5 text-sm w-full">
+                <p id="genre" class="w-2/3">Genre: ${subjects}</p>
+                <p id="book-id" class="text-gray-900 w-1/3 text-right">ID: ${bookID}</p>
+            </div>
         </div>
-        <div class="pt-5 flex items-start justify-between w-full">
-          <a href="book-details.html" id="book-title" class="font-bold hover:text-black text-[18px] w-4/5">${book.title}</a>
-          <div class="flex justify-end w-1/5 mt-1">
-          <img class="w-5 h-5 cursor-pointer love-icon" data-book-id="${bookID}" src="${isWishlisted ? `images/heart-solid.svg` : `images/heart-regular.svg`} " alt="">
-          </div>
-        </div>
-        <p id="author-name" class="author-name text-sm">Written by: ${author}</p>
-        <div class="flex justify-between mt-5 text-sm w-full">
-          <p id="genre" class="w-2/3">Genre: ${subjects}</p>
-          <p id="book-id" class="text-gray-900 w-1/3 text-right">ID: ${bookID}</p>
-        </div>
-      </div>
-    `;
+        `;
 
         container.appendChild(bookDiv);
+    });
+
+    document.querySelectorAll('.book-title').forEach(title => {
+        title.addEventListener('click', function(event) {
+            const bookID = event.target.getAttribute('data-book-id');
+            const selectedBook = books.find(book => book.id == bookID);
+
+            if (selectedBook) {
+                localStorage.setItem('selectedBook', JSON.stringify(selectedBook));
+                window.location.href = 'book-details.html';
+            }
+        });
     });
 
     document.querySelectorAll('.love-icon').forEach(icon => {

@@ -47,7 +47,9 @@
     </nav>
 
     <section class="book-details py-8 px-6 md:px-10">
-        <div class="details-wrap">
+        <div id="book-details-container"></div>
+
+        <!-- <div class="details-wrap">
             <h2 class="book-title text-3xl">The Wolf-slayer; Margaret Kaurner by Christoph von Schmid</h2>
             <div class="flex flex-col md:flex-row justify-between gap-5 mt-7">
                 <div class="w-full md:w-1/4">
@@ -97,8 +99,13 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
+
     </section>
+
+
+    
+
 
     <footer class="mx-auto bg-white py-8 border-t border-gray-400">
         <div class="flex px-10 py-8 ">
@@ -150,6 +157,108 @@
             </div>
         </div>
     </footer>
+    
+    <script>
+        const selectedBook = JSON.parse(localStorage.getItem('selectedBook'));
+        console.log(selectedBook);
+
+        if (selectedBook) {
+            const bookDetailsContainer = document.getElementById('book-details-container');
+            
+            const bookID = selectedBook.id;
+            const author = selectedBook.authors.length > 0 ? selectedBook.authors[0].name : 'Unknown author';
+            const subjects = selectedBook.subjects.join(', ') || 'No subjects listed';
+            const coverImage = selectedBook.formats['image/jpeg'] || 'https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg';
+            const downloadCount = selectedBook.download_count || '0';
+            const category = selectedBook.media_type;
+            const language = selectedBook.language || 'Not defined';
+
+            // Display the book details
+            bookDetailsContainer.innerHTML = `
+                <h2 class="book-title text-3xl">${selectedBook.title}</h2>
+                <div class="flex flex-col md:flex-row justify-between gap-5 mt-7">
+                <div class="w-full md:w-1/4">
+                    <img src="${coverImage}" alt="${selectedBook.title} cover" class="book-cover" style="box-shadow: 5px 5px 5px rgba(0,0,0,0.7)">
+                </div>
+                <div class="w-full md:w-3/4">
+                    <div class="mb-10">
+                        <h2 class="text-2xl mb-2">Details of this book</h2>
+                        <table class="table-fixed border-collapse border border-slate-500 w-full">
+                            <tbody>
+                              <tr class="w-full">
+                                <td class="border border-slate-700 p-3 w-1/4">Author</td>
+                                <td class="border border-slate-700 p-3 w-3/4">${author}</td>
+                              </tr>
+                              <tr>
+                                <td class="border border-slate-700 p-3">Title</td>
+                                <td class="border border-slate-700 p-3">${selectedBook.title}</td>
+                              </tr>
+                              <tr>
+                                <td class="border border-slate-700 p-3">Original Publication</td>
+                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                              </tr>
+                              <tr>
+                                <td class="border border-slate-700 p-3">Credits</td>
+                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">Language</td>
+                                <td class="border border-slate-700 p-3">${language}</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">Category</td>
+                                <td class="border border-slate-700 p-3">${category}</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">EBook-No.</td>
+                                <td class="border border-slate-700 p-3">${bookID}</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">Release Date</td>
+                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">Copyright Status</td>
+                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                              </tr>
+                                                            <tr>
+                                <td class="border border-slate-700 p-3">Downloads</td>
+                                <td class="border border-slate-700 p-3">${downloadCount}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+
+
+                    <div>
+                        <h2 class="text-2xl mb-2">Choose how to read this book!</h2>
+                        <table class="table-fixed border-collapse border border-slate-500 w-full">
+                            <tbody>
+                              <tr>
+                                <td class="border border-slate-700 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                <td class="border border-slate-700 p-3">Malcolm Lockyer</td>
+                              </tr>
+                              <tr>
+                                <td class="border border-slate-700 p-3">Witchy Woman</td>
+                                <td class="border border-slate-700 p-3">The Eagles</td>
+                              </tr>
+                              <tr>
+                                <td class="border border-slate-700 p-3">Shining Star</td>
+                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+
+                </div>
+            </div>
+            
+            
+                `;
+        } else {
+            document.getElementById('book-details-container').innerHTML = '<p>No book selected.</p>';
+        }
+    </script>
 </body>
 
 </html>
