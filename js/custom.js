@@ -1,12 +1,14 @@
 let API_URL = 'https://gutendex.com/books';
 let currentPage = 1;
 let booksData = [];
+let genres = [];
 
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const currentPageSpan = document.getElementById('current-page');
 const loadingElement = document.getElementById('loading');
 const searchField = document.getElementById('search-field');
+const genreFilter = document.getElementById('genre-filter');
 const paginationDiv = document.getElementById('pagination');
 
 async function fetchBookList(url) {
@@ -23,6 +25,7 @@ async function fetchBookList(url) {
         booksData = data.results;
 
         displayBooks(booksData);
+        genreList(booksData);
         updatePaginationButtons(data.previous, data.next);
     } catch (error) {
         console.error('There was a problem fetching the book list:', error);
@@ -74,6 +77,36 @@ function displayBooks(books) {
     });
 }
 
+function genreList(books){
+    const uniqueGenres = new Set();
+
+    books.forEach( book => {
+        book.subjects.forEach(subject => 
+            uniqueGenres.add(subject)
+        );
+    });
+
+    genreFilter.innerHTML = '<option value="">Select a genre</option>';
+
+    uniqueGenres.forEach(genre => {
+        const option = document.createElement('option');
+        option.value = genre;
+        option.textContent = genre;
+        genreFilter.appendChild(option);
+    });
+}
+
+function filterBooksByGenre(genre){
+    if (genre === ""){
+        displayBooks(booksData);
+    } else {
+        const filteredBooks = booksData.filter(book => 
+            book.subjects.includes(genre)
+        );
+        displayBooks(filteredBooks);
+    }
+}
+
 function updatePaginationButtons(previous, next) {
     if (previous) {
         prevBtn.disabled = false;
@@ -114,6 +147,11 @@ searchField.addEventListener('input', (e) => {
     );
     displayBooks(filteredBooks);
 });
+
+genreFilter.addEventListener('change', (e) => {
+    const selectGenre = e.target.value;
+    filterBooksByGenre(selectGenre);
+})
 
 
 // Fetch the initial book list
