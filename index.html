@@ -57,7 +57,7 @@
             <div class="flex flex-col w-full lg:w-1/2 justify-center items-start px-10 tracking-wide">
                 <h1 class="text-black text-2xl my-4">Lorem Ipsum is simply dummy text of the printing</h1>
                 <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
-                    href="#">Books</a>
+                    href="#store">Books</a>
             </div>
         </div>
     </section>
@@ -69,10 +69,7 @@
             <nav id="store" class="w-full z-30 top-0 py-1">
                 <div class="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
 
-                    <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl "
-                        href="#">
-                        Store
-                    </a>
+                    <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">Store</h2>
 
                     <div class="flex items-center" id="store-nav-content">
 
@@ -102,9 +99,9 @@
             <div id="books-container" class="flex flex-wrap w-full"></div>
 
             <div id="pagination" class="flex justify-center items-center space-x-4 mt-5 w-full">
-                <a id="prev-btn" class="bg-gray-200 text-gray-600 px-4 py-1 rounded" href="#store" disabled>Previous</a>
+                <button id="prev-btn" class="bg-gray-200 text-gray-600 px-4 py-1 rounded" onClick="document.getElementById('store').scrollIntoView();" disabled>Previous</button>
                 <span id="current-page">Page: 1</span>
-                <a id="next-btn" class="bg-gray-200 text-gray-600 px-4 py-1 rounded" href="#store">Next</a>
+                <button id="next-btn" class="bg-gray-200 text-gray-600 px-4 py-1 rounded" onClick="document.getElementById('store').scrollIntoView();">Next</button>
             </div>
 
 

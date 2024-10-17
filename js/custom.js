@@ -186,8 +186,31 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const savedSearchTerm = localStorage.getItem('searchTerm');
+    const container = document.getElementById('books-container');
+
+    container.style.display = 'none';
+
+    fetchBookList(API_URL).then(() => {
+        if (savedSearchTerm) {
+            searchField.value = savedSearchTerm; 
+
+            const filteredBooks = booksData.filter(book =>
+                book.title.toLowerCase().includes(savedSearchTerm)
+            );
+            displayBooks(filteredBooks); 
+        } else {
+            displayBooks(booksData); 
+        }
+        container.style.display = 'inherit';
+    });
+});
+
+
 searchField.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
+    localStorage.setItem('searchTerm', searchTerm);
     const filteredBooks = booksData.filter(book =>
         book.title.toLowerCase().includes(searchTerm)
     );
