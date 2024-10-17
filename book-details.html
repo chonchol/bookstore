@@ -47,7 +47,7 @@
     </nav>
 
     <section class="book-details py-8 px-6 md:px-10">
-        <div id="book-details-container"></div>
+        <div id="book-details-container" class="w-full md:w-5/6 mx-auto"></div>
 
         <!-- <div class="details-wrap">
             <h2 class="book-title text-3xl">The Wolf-slayer; Margaret Kaurner by Christoph von Schmid</h2>
@@ -61,16 +61,16 @@
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr>
-                                <td class="border border-slate-700 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                <td class="border border-slate-700 p-3">Malcolm Lockyer</td>
+                                <td class="border border-gray-400 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                <td class="border border-gray-400 p-3">Malcolm Lockyer</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Witchy Woman</td>
-                                <td class="border border-slate-700 p-3">The Eagles</td>
+                                <td class="border border-gray-400 p-3">Witchy Woman</td>
+                                <td class="border border-gray-400 p-3">The Eagles</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Shining Star</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <td class="border border-gray-400 p-3">Shining Star</td>
+                                <td class="border border-gray-400 p-3">Earth, Wind, and Fire</td>
                               </tr>
                             </tbody>
                           </table>
@@ -82,16 +82,16 @@
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr>
-                                <td class="border border-slate-700 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                <td class="border border-slate-700 p-3">Malcolm Lockyer</td>
+                                <td class="border border-gray-400 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                                <td class="border border-gray-400 p-3">Malcolm Lockyer</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Witchy Woman</td>
-                                <td class="border border-slate-700 p-3">The Eagles</td>
+                                <td class="border border-gray-400 p-3">Witchy Woman</td>
+                                <td class="border border-gray-400 p-3">The Eagles</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Shining Star</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <td class="border border-gray-400 p-3">Shining Star</td>
+                                <td class="border border-gray-400 p-3">Earth, Wind, and Fire</td>
                               </tr>
                             </tbody>
                           </table>
@@ -165,20 +165,23 @@
         if (selectedBook) {
             const bookDetailsContainer = document.getElementById('book-details-container');
             
-            const bookID = selectedBook.id;
-            const author = selectedBook.authors.length > 0 ? selectedBook.authors[0].name : 'Unknown author';
-            const subjects = selectedBook.subjects.join(', ') || 'No subjects listed';
             const coverImage = selectedBook.formats['image/jpeg'] || 'https://www.gutenberg.org/cache/epub/1342/pg1342.cover.medium.jpg';
-            const downloadCount = selectedBook.download_count || '0';
-            const category = selectedBook.media_type;
-            const language = selectedBook.language || 'Not defined';
+            const language = selectedBook.languages[0] === 'en' ? 'English' : selectedBook.languages[0] || 'Not defined';
+            const readOnline = selectedBook.formats['text/html'] || 'false';
+            const epub3 = selectedBook.formats['application/epub+zip'] || 'false';
+            const kindle = selectedBook.formats['application/x-mobipocket-ebook'] || 'false';
+            const plainText = selectedBook.formats['text/plain; charset=us-ascii'] || 'false';
+            const downloadHTML = selectedBook.formats['application/zip'] || 'false';
+            // console.log(test); 
 
             // Display the book details
             bookDetailsContainer.innerHTML = `
                 <h2 class="book-title text-3xl">${selectedBook.title}</h2>
                 <div class="flex flex-col md:flex-row justify-between gap-5 mt-7">
                 <div class="w-full md:w-1/4">
+                    <div class="mt-10">
                     <img src="${coverImage}" alt="${selectedBook.title} cover" class="book-cover" style="box-shadow: 5px 5px 5px rgba(0,0,0,0.7)">
+                    </div>
                 </div>
                 <div class="w-full md:w-3/4">
                     <div class="mb-10">
@@ -186,75 +189,77 @@
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr class="w-full">
-                                <td class="border border-slate-700 p-3 w-1/4">Author</td>
-                                <td class="border border-slate-700 p-3 w-3/4">${author}</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Author</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.authors[0].name} (${selectedBook.authors[0].birth_year || 'Not available'} - ${selectedBook.authors[0].death_year || 'Not available'})</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Title</td>
-                                <td class="border border-slate-700 p-3">${selectedBook.title}</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Title</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.title}</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Original Publication</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Subjects</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.subjects.join(', ') || 'No subjects listed'}</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Credits</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Bookshelves</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.bookshelves.join(', ') || 'No bookshelves listed'}</td>
                               </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">Language</td>
-                                <td class="border border-slate-700 p-3">${language}</td>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Language</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${language}</td>
                               </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">Category</td>
-                                <td class="border border-slate-700 p-3">${category}</td>
+                                </tr>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Translator</td>
+                                <td class="border border-gray-400 p-3 w-3/4">
+                                    ${selectedBook.translators.length > 0 ? `${selectedBook.translators[0].name} (${selectedBook.translators[0].birth_year || 'Not available'} - ${selectedBook.translators[0].death_year || 'Not available'})` : `Not available`}
+                                </td>
                               </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">EBook-No.</td>
-                                <td class="border border-slate-700 p-3">${bookID}</td>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Category</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.media_type}</td>
                               </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">Release Date</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Book ID -No.</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.id}</td>
                               </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">Copyright Status</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
-                              </tr>
-                                                            <tr>
-                                <td class="border border-slate-700 p-3">Downloads</td>
-                                <td class="border border-slate-700 p-3">${downloadCount}</td>
+                              <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Downloads</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.download_count || '0'}</td>
                               </tr>
                             </tbody>
                           </table>
                     </div>
-
-
                     <div>
                         <h2 class="text-2xl mb-2">Choose how to read this book!</h2>
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr>
-                                <td class="border border-slate-700 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                <td class="border border-slate-700 p-3">Malcolm Lockyer</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Read online</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${readOnline === 'false' ? `Link is not available` : `<a href="${readOnline}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                               <tr>
-                                <td class="border border-slate-700 p-3">Witchy Woman</td>
-                                <td class="border border-slate-700 p-3">The Eagles</td>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">EPUB3 (E-readers incl. Send-to-Kindle)</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${epub3 === 'false' ? `Link is not available` : `<a href="${epub3}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
-                              <tr>
-                                <td class="border border-slate-700 p-3">Shining Star</td>
-                                <td class="border border-slate-700 p-3">Earth, Wind, and Fire</td>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Kindle</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${kindle === 'false' ? `Link is not available` : `<a href="${kindle}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
+                              </tr>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Plain Text UTF-8</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${plainText === 'false' ? `Link is not available` : `<a href="${plainText}" class="underline text-[darkgoldenrod]"> Link </a>`}
+                                </td>
+                              </tr>
+                                <tr>
+                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Download HTML (zip)</td>
+                                <td class="border border-gray-400 p-3 w-3/4">${downloadHTML === 'false' ? `Link is not available` : `<a href="${downloadHTML}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                             </tbody>
                           </table>
                     </div>
-
                 </div>
-            </div>
-            
-            
-                `;
+            </div>`;
         } else {
             document.getElementById('book-details-container').innerHTML = '<p>No book selected.</p>';
         }
