@@ -15,6 +15,9 @@ async function fetchBookList(url) {
   try {
     loadingElement.style.display = "block";
     paginationDiv.style.display = "none";
+    const container = document.getElementById("books-container");
+    container.style.display = "none";
+
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -32,7 +35,9 @@ async function fetchBookList(url) {
     console.error("There was a problem fetching the book list:", error);
   } finally {
     loadingElement.style.display = "none";
-    paginationDiv.style.display = "inherit";
+    const container = document.getElementById("books-container");
+    container.style.display = "inherit"; 
+    paginationDiv.style.display = "inherit"; 
   }
 }
 

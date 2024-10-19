@@ -137,13 +137,11 @@
             bookDiv.innerHTML = `
         <div>
             <div id="cover-img" class="cover-img w-full h-[300px]">
-            <a href="book-details.html" data-book-id="${bookID}">
             <img class="hover:grow hover:shadow-lg w-full h-full rounded"
             src="${coverImage}" alt="${book.title} cover">
             </div>
-            </a>
             <div class="pt-5 flex items-start justify-between w-full">
-            <a href="book-details.html" id="book-title" class="font-bold hover:text-black text-[18px] w-4/5">${book.title}</a>
+            <a href="#" id="book-title" class="font-bold hover:text-black text-[18px] w-4/5">${book.title}</a>
             <div class="flex justify-end w-1/5 mt-1">
             <img class="w-5 h-5 cursor-pointer love-icon" data-book-id="${bookID}" src="images/heart-solid.svg" alt="">
             </div>
