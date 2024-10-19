@@ -52,8 +52,8 @@
 
     <!-- Hero Section  -->
     <section class="w-full mx-auto bg-nordic-gray-light flex pt-12 md:pt-0 md:items-center bg-cover bg-right"
-        style="height: 28rem; background-image: url('images/hero-bg.jpg');">
-        <div class="w-full mx-auto">
+        style="height: 20rem; background-image: url('images/hero-bg.jpg');">
+        <div class="w-full mx-auto backdrop-blur-sm md:backdrop-filter-none">
             <div class="flex flex-col w-full lg:w-1/2 justify-center items-start px-10 tracking-wide">
                 <h1 class="text-black text-2xl my-4">Lorem Ipsum is simply dummy text of the printing</h1>
                 <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black"
@@ -67,11 +67,11 @@
 
         <div class="mx-auto flex items-center flex-wrap pt-4 pb-12">
             <nav id="store" class="w-full z-30 top-0 py-1">
-                <div class="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-3">
+                <div class="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-3 gap-y-10">
 
-                    <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">Store</h2>
+                    <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-3xl">Store</h2>
 
-                    <div class="flex items-center" id="store-nav-content">
+                    <div class="flex items-start md:items-center flex-col md:flex-row gap-5 md:gap-0" id="store-nav-content">
 
                         <div class="genre-filter flex justify-between items-center">
                             <p class="font-bold">Genre/Topics:</p>
@@ -81,8 +81,8 @@
                             </select>
                         </div>
 
-                        <form class="relative pl-3">
-                            <input type="text" id="search-field" placeholder="Search by title..." class="border-2 border-black rounded py-1 pl-2 pr-5">
+                        <form class="relative pl-0 md:pl-3 w-full">
+                            <input type="text" id="search-field" placeholder="Search by title..." class="border-2 border-black rounded py-1 pl-2 pr-5 w-full">
                             <div class="hover:text-black search-icon absolute top-2.5 right-1">
                                 <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
                             </div>

@@ -48,64 +48,7 @@
 
     <section class="book-details py-8 px-6 md:px-10">
         <div id="book-details-container" class="w-full md:w-5/6 mx-auto"></div>
-
-        <!-- <div class="details-wrap">
-            <h2 class="book-title text-3xl">The Wolf-slayer; Margaret Kaurner by Christoph von Schmid</h2>
-            <div class="flex flex-col md:flex-row justify-between gap-5 mt-7">
-                <div class="w-full md:w-1/4">
-                    <img src="https://www.gutenberg.org/cache/epub/74582/pg74582.cover.medium.jpg" alt="" class="book-cover">
-                </div>
-                <div class="w-full md:w-3/4">
-                    <div class="mb-10">
-                        <h2 class="text-2xl mb-2">Details of this book</h2>
-                        <table class="table-fixed border-collapse border border-slate-500 w-full">
-                            <tbody>
-                              <tr>
-                                <td class="border border-gray-400 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                <td class="border border-gray-400 p-3">Malcolm Lockyer</td>
-                              </tr>
-                              <tr>
-                                <td class="border border-gray-400 p-3">Witchy Woman</td>
-                                <td class="border border-gray-400 p-3">The Eagles</td>
-                              </tr>
-                              <tr>
-                                <td class="border border-gray-400 p-3">Shining Star</td>
-                                <td class="border border-gray-400 p-3">Earth, Wind, and Fire</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                    </div>
-
-
-                    <div>
-                        <h2 class="text-2xl mb-2">Choose how to read this book!</h2>
-                        <table class="table-fixed border-collapse border border-slate-500 w-full">
-                            <tbody>
-                              <tr>
-                                <td class="border border-gray-400 p-3">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                                <td class="border border-gray-400 p-3">Malcolm Lockyer</td>
-                              </tr>
-                              <tr>
-                                <td class="border border-gray-400 p-3">Witchy Woman</td>
-                                <td class="border border-gray-400 p-3">The Eagles</td>
-                              </tr>
-                              <tr>
-                                <td class="border border-gray-400 p-3">Shining Star</td>
-                                <td class="border border-gray-400 p-3">Earth, Wind, and Fire</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                    </div>
-
-                </div>
-            </div>
-        </div> -->
-
     </section>
-
-
-    
-
 
     <footer class="mx-auto bg-white py-8 border-t border-gray-400">
         <div class="flex px-10 py-8 ">
@@ -177,7 +120,7 @@
             // Display the book details
             bookDetailsContainer.innerHTML = `
                 <h2 class="book-title text-3xl">${selectedBook.title}</h2>
-                <div class="flex flex-col md:flex-row justify-between gap-5 mt-7">
+                <div class="flex flex-col md:flex-row justify-between gap-5 mt-0 md:mt-7">
                 <div class="w-full md:w-1/4">
                     <div class="mt-10">
                     <img src="${coverImage}" alt="${selectedBook.title} cover" class="book-cover" style="box-shadow: 5px 5px 5px rgba(0,0,0,0.7)">
@@ -189,43 +132,43 @@
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr class="w-full">
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Author</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.authors[0].name} (${selectedBook.authors[0].birth_year || 'Not available'} - ${selectedBook.authors[0].death_year || 'Not available'})</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Author</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.authors[0].name} (${selectedBook.authors[0].birth_year || 'Not available'} - ${selectedBook.authors[0].death_year || 'Not available'})</td>
                               </tr>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Title</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.title}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Title</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.title}</td>
                               </tr>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Subjects</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.subjects.join(', ') || 'No subjects listed'}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Subjects</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.subjects.join(', ') || 'No subjects listed'}</td>
                               </tr>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Bookshelves</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.bookshelves.join(', ') || 'No bookshelves listed'}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Bookshelves</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.bookshelves.join(', ') || 'No bookshelves listed'}</td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Language</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${language}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Language</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${language}</td>
                               </tr>
                                 </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Translator</td>
-                                <td class="border border-gray-400 p-3 w-3/4">
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Translator</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">
                                     ${selectedBook.translators.length > 0 ? `${selectedBook.translators[0].name} (${selectedBook.translators[0].birth_year || 'Not available'} - ${selectedBook.translators[0].death_year || 'Not available'})` : `Not available`}
                                 </td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Category</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.media_type}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Category</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.media_type}</td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Book ID -No.</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.id}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Book ID -No.</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.id}</td>
                               </tr>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Downloads</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${selectedBook.download_count || '0'}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Downloads</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${selectedBook.download_count || '0'}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -235,25 +178,25 @@
                         <table class="table-fixed border-collapse border border-slate-500 w-full">
                             <tbody>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Read online</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${readOnline === 'false' ? `Link is not available` : `<a href="${readOnline}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Read online</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${readOnline === 'false' ? `Link is not available` : `<a href="${readOnline}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                               <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">EPUB3 (E-readers incl. Send-to-Kindle)</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${epub3 === 'false' ? `Link is not available` : `<a href="${epub3}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">EPUB3 (E-readers incl. Send-to-Kindle)</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${epub3 === 'false' ? `Link is not available` : `<a href="${epub3}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Kindle</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${kindle === 'false' ? `Link is not available` : `<a href="${kindle}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Kindle</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${kindle === 'false' ? `Link is not available` : `<a href="${kindle}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Plain Text UTF-8</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${plainText === 'false' ? `Link is not available` : `<a href="${plainText}" class="underline text-[darkgoldenrod]"> Link </a>`}
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Plain Text UTF-8</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${plainText === 'false' ? `Link is not available` : `<a href="${plainText}" class="underline text-[darkgoldenrod]"> Link </a>`}
                                 </td>
                               </tr>
                                 <tr>
-                                <td class="border border-gray-400 p-3 w-1/4 bg-[#f8f9fa] font-bold">Download HTML (zip)</td>
-                                <td class="border border-gray-400 p-3 w-3/4">${downloadHTML === 'false' ? `Link is not available` : `<a href="${downloadHTML}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
+                                <td class="border border-gray-400 p-3 w-2/5 md:w-1/4 bg-[#f8f9fa] font-bold">Download HTML (zip)</td>
+                                <td class="border border-gray-400 p-3 w-3/5 md:w-3/4">${downloadHTML === 'false' ? `Link is not available` : `<a href="${downloadHTML}" class="underline text-[darkgoldenrod]"> Link </a>`}</td>
                               </tr>
                             </tbody>
                           </table>

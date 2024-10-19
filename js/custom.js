@@ -55,13 +55,15 @@ function displayBooks(books) {
         const isWishlisted = savedBooks.some(savedBook => savedBook.id === bookID);
 
         const bookDiv = document.createElement('div');
-        bookDiv.classList.add('w-full', 'md:w-1/3', 'xl:w-1/4', 'p-6', 'flex', 'flex-col');
+        bookDiv.classList.add('w-full', 'md:w-1/3', 'xl:w-1/4', 'p-0','md:p-6', 'flex', 'flex-col', 'py-6');
 
         bookDiv.innerHTML = `
         <div>
             <div id="cover-img" class="cover-img w-full h-[300px]">
+            <a href="book-details.html" data-book-id="${bookID}">
                 <img class="hover:grow hover:shadow-lg w-full h-full rounded"
                 src="${coverImage}" alt="${book.title} cover">
+            </a>
             </div>
             <div class="pt-5 flex items-start justify-between w-full">
                 <a href="book-details.html" class="font-bold hover:text-black text-[18px] w-4/5 book-title" data-book-id="${bookID}">${book.title}</a>
@@ -159,12 +161,14 @@ function updatePaginationButtons(previous, next) {
         prevBtn.setAttribute('data-url', previous);
     } else {
         prevBtn.disabled = true;
+        prevBtn.style.cursor = 'not-allowed';
     }
     if (next) {
         nextBtn.disabled = false;
         nextBtn.setAttribute('data-url', next);
     } else {
         nextBtn.disabled = true;
+        nextBtn.style.cursor = 'not-allowed';
     }
     currentPageSpan.textContent = `Page: ${currentPage}`;
 }
