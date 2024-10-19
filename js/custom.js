@@ -28,7 +28,19 @@ async function fetchBookList(url) {
     booksData = data.results;
     // console.log("Books data fetched:", booksData);
 
-    displayBooks(booksData);
+    const savedSearchTerm = localStorage.getItem("searchTerm");
+    if (savedSearchTerm) {
+      searchField.value = savedSearchTerm;
+      const filteredBooks = booksData.filter((book) =>
+        book.title.toLowerCase().includes(savedSearchTerm.toLowerCase())
+      );
+
+      displayBooks(filteredBooks);
+    } else {
+      displayBooks(booksData);
+    }
+
+    // displayBooks(booksData);
     genreList(booksData);
     updatePaginationButtons(data.previous, data.next);
   } catch (error) {
@@ -36,8 +48,8 @@ async function fetchBookList(url) {
   } finally {
     loadingElement.style.display = "none";
     const container = document.getElementById("books-container");
-    container.style.display = "inherit"; 
-    paginationDiv.style.display = "inherit"; 
+    container.style.display = "inherit";
+    paginationDiv.style.display = "inherit";
   }
 }
 
@@ -214,24 +226,7 @@ nextBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedSearchTerm = localStorage.getItem("searchTerm");
-  const container = document.getElementById("books-container");
-
-  container.style.display = "none";
-
-  fetchBookList(API_URL).then(() => {
-    if (savedSearchTerm) {
-      searchField.value = savedSearchTerm;
-
-      const filteredBooks = booksData.filter((book) =>
-        book.title.toLowerCase().includes(savedSearchTerm)
-      );
-      displayBooks(filteredBooks);
-    } else {
-      displayBooks(booksData);
-    }
-    container.style.display = "inherit";
-  });
+  fetchBookList(API_URL);
 });
 
 searchField.addEventListener("input", (e) => {
